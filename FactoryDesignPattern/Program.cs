@@ -1,6 +1,6 @@
-﻿using FactoryMethodPattern;
-using FactoryMethodPattern.Enum;
-using FactoryMethodPattern.Factory;
+﻿using FactoryDesignPattern.Abstract;
+using FactoryDesignPattern.Enum;
+using FactoryDesignPattern.Factory;
 using System;
 
 namespace FactoryDesignPattern
