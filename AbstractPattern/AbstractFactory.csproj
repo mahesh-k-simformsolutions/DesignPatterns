@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FactoryDesignPattern\FactoryDesignPattern.csproj" />
+    <ProjectReference Include="..\FactoryDesignPattern\Factory.csproj" />
   </ItemGroup>
 
 </Project>
