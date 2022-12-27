@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactoryDesignPattern.Enum
+namespace AbstractPattern.Interface
 {
-    public enum ScreenType
+    public interface IPhone
     {
-        Desktop,
-        web,
-        Mobile,
+        string Model();
+        string Battery();
     }
 }

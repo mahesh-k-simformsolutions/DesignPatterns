@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FactoryDesignPattern.Factory
 {
-    class Creator
+    public class ScreenFactory
     {
-        public IScreen ScreenFactory(ScreenType screenType)
+        public IScreen CreateScreen(ScreenType screenType)
         {
             if (screenType == ScreenType.Desktop)
             {

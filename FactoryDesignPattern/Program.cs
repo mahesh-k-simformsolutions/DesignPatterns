@@ -9,9 +9,9 @@ namespace FactoryDesignPattern
     {
         static void Main(string[] args)
         {
-            Creator creator = new Creator();
-            IScreen desktop = creator.ScreenFactory(ScreenType.Desktop);
-            IScreen mobile = creator.ScreenFactory(ScreenType.Mobile);
+            ScreenFactory creator = new ScreenFactory();
+            IScreen desktop = creator.CreateScreen(ScreenType.Desktop);
+            IScreen mobile = creator.CreateScreen(ScreenType.Mobile);
             desktop.Draw();
             mobile.Draw();
         }
