@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryPattern", "..\Rep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractPattern", "..\AbstractPattern\AbstractPattern.csproj", "{28CE020A-7950-40BA-B285-F3395B011158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSDesignPattern", "..\CQRSDesignPattern\CQRSDesignPattern.csproj", "{580B6412-72AF-4688-B82C-C8559DC83361}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{28CE020A-7950-40BA-B285-F3395B011158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28CE020A-7950-40BA-B285-F3395B011158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28CE020A-7950-40BA-B285-F3395B011158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{580B6412-72AF-4688-B82C-C8559DC83361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580B6412-72AF-4688-B82C-C8559DC83361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580B6412-72AF-4688-B82C-C8559DC83361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580B6412-72AF-4688-B82C-C8559DC83361}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
