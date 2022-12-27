@@ -7,18 +7,18 @@ namespace AbstractPattern
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             MainFactory factory = new();
-            var screenFactory = factory.CreateScreenFactory();
-            var phoneFactory = factory.CreatePhoneFactory();
+            FactoryDesignPattern.Factory.ScreenFactory screenFactory = factory.CreateScreenFactory();
+            Factory.PhoneFactory phoneFactory = factory.CreatePhoneFactory();
             IScreen screen = screenFactory.CreateScreen(FactoryDesignPattern.Enum.ScreenType.Desktop);
             screen.Draw();
 
             IPhone phone = phoneFactory.CreatePhone("Samsung", "500mah");
             Console.WriteLine(phone.ToString());
 
-            Console.ReadLine();
+            _ = Console.ReadLine();
         }
     }
 

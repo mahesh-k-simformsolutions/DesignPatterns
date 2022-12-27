@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AbstractPattern.Interface;
+﻿using AbstractPattern.Interface;
 namespace AbstractPattern.Concrete
 {
-    class Samsung : IPhone
+    internal class Samsung : IPhone
     {
-        private string model;
-        private string battery;
-        public Samsung(string model,string battery)
+        private readonly string model;
+        private readonly string battery;
+        public Samsung(string model, string battery)
         {
             this.model = model;
             this.battery = battery;
@@ -26,7 +21,7 @@ namespace AbstractPattern.Concrete
         }
         public override string ToString()
         {
-            return $"Samsung:{this.model}--{this.battery}";
+            return $"Samsung:{model}--{battery}";
         }
     }
 }

@@ -1,9 +1,7 @@
+using MediatR;
+using RepositoryPattern.Repository;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using RepositoryPattern.Data;
-using RepositoryPattern.Repository;
 
 namespace CQRSDesignPattern.Queries
 {
@@ -16,11 +14,14 @@ namespace CQRSDesignPattern.Queries
         public class Handler : IRequestHandler<Query, Response>
         {
             public IProductRepository _productRepository { get; }
-            public Handler(IProductRepository productRepository) => this._productRepository = productRepository;
+            public Handler(IProductRepository productRepository)
+            {
+                _productRepository = productRepository;
+            }
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var product = await _productRepository.GetById(request.id);
+                RepositoryPattern.Data.Entity.Product product = await _productRepository.GetById(request.id);
                 return product == null ? null : new Response(product.Product_PK, product.ProductName, product.Description);
             }
         }

@@ -6,7 +6,7 @@ namespace RepositoryPattern.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -17,10 +17,10 @@ namespace RepositoryPattern.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Category_PK);
+                    _ = table.PrimaryKey("PK_Categories", x => x.Category_PK);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -35,8 +35,8 @@ namespace RepositoryPattern.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Product_PK);
-                    table.ForeignKey(
+                    _ = table.PrimaryKey("PK_Products", x => x.Product_PK);
+                    _ = table.ForeignKey(
                         name: "FK_Products_Categories_Category_FK",
                         column: x => x.Category_FK,
                         principalTable: "Categories",
@@ -44,7 +44,7 @@ namespace RepositoryPattern.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
+            _ = migrationBuilder.CreateIndex(
                 name: "IX_Products_Category_FK",
                 table: "Products",
                 column: "Category_FK");
@@ -52,10 +52,10 @@ namespace RepositoryPattern.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Products");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Categories");
         }
     }

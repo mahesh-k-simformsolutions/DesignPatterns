@@ -1,8 +1,6 @@
 ﻿using RepositoryPattern.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace RepositoryPattern.Repository.Base
@@ -27,38 +25,38 @@ namespace RepositoryPattern.Repository.Base
 
         public void Add(T entity)
         {
-            _context.Set<T>().Add(entity);
-            _context.SaveChanges();
+            _ = _context.Set<T>().Add(entity);
+            _ = _context.SaveChanges();
         }
 
         public void AddRange(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
-            _context.SaveChanges();
+            _ = _context.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            _context.Set<T>().Update(entity);
-            _context.SaveChanges();
+            _ = _context.Set<T>().Update(entity);
+            _ = _context.SaveChanges();
         }
 
         public void UpdateRange(IEnumerable<T> entities)
         {
             _context.Set<T>().UpdateRange(entities);
-            _context.SaveChanges();
+            _ = _context.SaveChanges();
         }
 
         public void Remove(T entity)
         {
-            _context.Set<T>().Remove(entity);
-            _context.SaveChanges();
+            _ = _context.Set<T>().Remove(entity);
+            _ = _context.SaveChanges();
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
             _context.Set<T>().RemoveRange(entities);
-            _context.SaveChanges();
+            _ = _context.SaveChanges();
         }
     }
 }

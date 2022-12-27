@@ -1,9 +1,5 @@
 ﻿using MediatorDesignPattern.Concrete;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediatorDesignPattern.Abstract
 {
@@ -13,7 +9,7 @@ namespace MediatorDesignPattern.Abstract
         public Mediator concreteMediator { set; get; }
         public User(string name)
         {
-            this.Name = name;
+            Name = name;
         }
         public void SendMessage(string receiver, string messsage)
         {

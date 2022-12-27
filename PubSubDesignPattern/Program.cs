@@ -3,12 +3,12 @@ namespace PubSubDesignPattern
 {
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var publisher = new Publisher.Publisher();
-            
-            var dateSub = new Subscriber.DateTimeSubscriber();
-            var daySub = new Subscriber.DaySubscriber();
+            Publisher.Publisher publisher = new();
+
+            Subscriber.DateTimeSubscriber dateSub = new();
+            Subscriber.DaySubscriber daySub = new();
 
             publisher.Subscribe(dateSub.Display);
             publisher.Subscribe(daySub.Display);

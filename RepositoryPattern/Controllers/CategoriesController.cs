@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RepositoryPattern.Data.Entity;
+using RepositoryPattern.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using RepositoryPattern.Data;
-using RepositoryPattern.Data.Entity;
-using RepositoryPattern.Repository;
 
 namespace RepositoryPattern.Controllers
 {
@@ -19,12 +16,12 @@ namespace RepositoryPattern.Controllers
         public CategoriesController(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
-            this._categoryRepository = categoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = _categoryRepository.GetAll();
+            IEnumerable<Category> categories = _categoryRepository.GetAll();
             return View(categories.ToList());
         }
 
@@ -35,13 +32,8 @@ namespace RepositoryPattern.Controllers
                 return NotFound();
             }
 
-            var product = await _categoryRepository.GetById(id.GetValueOrDefault());
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
+            Category product = await _categoryRepository.GetById(id.GetValueOrDefault());
+            return product == null ? NotFound() : View(product);
         }
 
         public IActionResult Create()
@@ -66,12 +58,8 @@ namespace RepositoryPattern.Controllers
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetById(id.GetValueOrDefault());
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
+            Category category = await _categoryRepository.GetById(id.GetValueOrDefault());
+            return category == null ? NotFound() : View(category);
         }
 
         [HttpPost]
@@ -90,7 +78,7 @@ namespace RepositoryPattern.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    var categoryInDb = await _categoryRepository.GetById(id);
+                    Category categoryInDb = await _categoryRepository.GetById(id);
                     if (categoryInDb == null)
                     {
                         return NotFound();
@@ -112,19 +100,14 @@ namespace RepositoryPattern.Controllers
                 return NotFound();
             }
 
-            var category = await _categoryRepository.GetById(id.GetValueOrDefault());
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
+            Category category = await _categoryRepository.GetById(id.GetValueOrDefault());
+            return category == null ? NotFound() : View(category);
         }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _categoryRepository.GetById(id);
+            Category category = await _categoryRepository.GetById(id);
             _categoryRepository.Remove(category);
             return RedirectToAction(nameof(Index));
         }

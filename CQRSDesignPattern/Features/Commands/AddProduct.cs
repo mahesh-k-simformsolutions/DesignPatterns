@@ -1,9 +1,8 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using RepositoryPattern.Data;
 using RepositoryPattern.Data.Entity;
 using RepositoryPattern.Repository;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CQRSDesignPattern.Commands
 {
@@ -16,7 +15,10 @@ namespace CQRSDesignPattern.Commands
         public class Handler : IRequestHandler<Command, int>
         {
             public IProductRepository _productRepository { get; }
-            public Handler(IProductRepository productRepository) => this._productRepository = productRepository;
+            public Handler(IProductRepository productRepository)
+            {
+                _productRepository = productRepository;
+            }
 
             public async Task<int> Handle(Command request, CancellationToken cancellationToken)
             {

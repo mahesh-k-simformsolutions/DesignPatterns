@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using RepositoryPattern.Data;
 using RepositoryPattern.Data.Entity;
 using RepositoryPattern.Repository;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RepositoryPattern.Controllers
 {
@@ -17,12 +16,12 @@ namespace RepositoryPattern.Controllers
         public ProductsController(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
-            this._categoryRepository = categoryRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IActionResult> Index()
         {
-            var products = _productRepository.GetAll();
+            System.Collections.Generic.IEnumerable<Product> products = _productRepository.GetAll();
             return View(products.ToList());
         }
         public async Task<IActionResult> Details(int? id)
@@ -32,13 +31,8 @@ namespace RepositoryPattern.Controllers
                 return NotFound();
             }
 
-            var product = await _productRepository.GetById(id.GetValueOrDefault());
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
+            Product product = await _productRepository.GetById(id.GetValueOrDefault());
+            return product == null ? NotFound() : View(product);
         }
 
         public IActionResult Create()
@@ -66,7 +60,7 @@ namespace RepositoryPattern.Controllers
                 return NotFound();
             }
 
-            var product = await _productRepository.GetById(id.GetValueOrDefault());
+            Product product = await _productRepository.GetById(id.GetValueOrDefault());
             if (product == null)
             {
                 return NotFound();
@@ -90,7 +84,7 @@ namespace RepositoryPattern.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    var productInDb = await _productRepository.GetById(id);
+                    Product productInDb = await _productRepository.GetById(id);
                     if (productInDb == null)
                     {
                         return NotFound();
@@ -112,19 +106,14 @@ namespace RepositoryPattern.Controllers
                 return NotFound();
             }
 
-            var product = await _productRepository.GetById(id.GetValueOrDefault());
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
+            Product product = await _productRepository.GetById(id.GetValueOrDefault());
+            return product == null ? NotFound() : View(product);
         }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _productRepository.GetById(id);
+            Product product = await _productRepository.GetById(id);
             _productRepository.Remove(product);
             return RedirectToAction(nameof(Index));
         }

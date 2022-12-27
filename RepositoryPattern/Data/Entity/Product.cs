@@ -12,7 +12,7 @@ namespace RepositoryPattern.Data.Entity
         public string ProductName { get; set; }
 
         public string Description { get; set; }
-       
+
         public string Image { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
@@ -20,7 +20,7 @@ namespace RepositoryPattern.Data.Entity
 
         public float? Discount { get; set; }
 
-        public decimal? DiscountPrice { get { return Price.GetValueOrDefault() - (Price.GetValueOrDefault() * (decimal)Discount.GetValueOrDefault(0) / 100); } }
+        public decimal? DiscountPrice => Price.GetValueOrDefault() - (Price.GetValueOrDefault() * (decimal)Discount.GetValueOrDefault(0) / 100);
 
         [DisplayName("Category")]
         [ForeignKey("Category")]

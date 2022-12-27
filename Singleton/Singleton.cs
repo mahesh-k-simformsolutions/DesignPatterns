@@ -4,7 +4,7 @@
     {
         // Using static property and private constructor 
         private static Singleton _instance;
-        private static object _lockObject = new();
+        private static readonly object _lockObject = new();
         private Singleton()
         {
         }
