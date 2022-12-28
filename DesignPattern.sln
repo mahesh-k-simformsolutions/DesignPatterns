@@ -21,13 +21,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "RepositoryPat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singleton", "Singleton\Singleton.csproj", "{582D4F9C-C085-4EF4-B723-63228F38989A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saga.OrderService", "Saga.OrderService\Saga.OrderService.csproj", "{2E668691-3C0E-4E6A-89CE-0C30E300824C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.OrderService", "Saga.OrderService\Saga.OrderService.csproj", "{2E668691-3C0E-4E6A-89CE-0C30E300824C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saga.StockService", "Saga.StockService\Saga.StockService.csproj", "{8F685AE1-8E41-4A6D-8C0E-3A072ADA44CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.StockService", "Saga.StockService\Saga.StockService.csproj", "{8F685AE1-8E41-4A6D-8C0E-3A072ADA44CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saga.PaymentService", "Saga.PaymentService\Saga.PaymentService.csproj", "{49DEEC57-0CD7-498D-915B-7287A56599A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.PaymentService", "Saga.PaymentService\Saga.PaymentService.csproj", "{49DEEC57-0CD7-498D-915B-7287A56599A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saga.Events", "Saga.Events\Saga.Events.csproj", "{8CF0F57E-E1D7-42F2-B012-EA605E0E29FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saga.Events", "Saga.Events\Saga.Events.csproj", "{8CF0F57E-E1D7-42F2-B012-EA605E0E29FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CircuitBreaker", "CircuitBreaker", "{AA652D2F-6EFB-4098-B100-05E3970F209A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saga", "Saga", "{49518B37-4C60-441B-B99E-F68748630BE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +94,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C179EFB1-DC21-4DEA-B11F-E85C8FB12784} = {AA652D2F-6EFB-4098-B100-05E3970F209A}
+		{D2935059-14A9-46E8-9F98-15BCD6C6B6EC} = {AA652D2F-6EFB-4098-B100-05E3970F209A}
+		{2E668691-3C0E-4E6A-89CE-0C30E300824C} = {49518B37-4C60-441B-B99E-F68748630BE2}
+		{8F685AE1-8E41-4A6D-8C0E-3A072ADA44CF} = {49518B37-4C60-441B-B99E-F68748630BE2}
+		{49DEEC57-0CD7-498D-915B-7287A56599A7} = {49518B37-4C60-441B-B99E-F68748630BE2}
+		{8CF0F57E-E1D7-42F2-B012-EA605E0E29FF} = {49518B37-4C60-441B-B99E-F68748630BE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FB38400-453C-489A-A186-007E0850DA14}
