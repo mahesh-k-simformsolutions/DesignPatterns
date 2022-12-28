@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CircuitBreaker", "CircuitBr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saga", "Saga", "{49518B37-4C60-441B-B99E-F68748630BE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Throttling", "Throttling\Throttling.csproj", "{93E97116-51E7-405B-A11F-2D179DE3F5BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{8CF0F57E-E1D7-42F2-B012-EA605E0E29FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CF0F57E-E1D7-42F2-B012-EA605E0E29FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CF0F57E-E1D7-42F2-B012-EA605E0E29FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E97116-51E7-405B-A11F-2D179DE3F5BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E97116-51E7-405B-A11F-2D179DE3F5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E97116-51E7-405B-A11F-2D179DE3F5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E97116-51E7-405B-A11F-2D179DE3F5BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
