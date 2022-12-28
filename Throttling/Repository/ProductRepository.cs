@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Throttling.Record;
+﻿using Throttling.Record;
 
 namespace Throttling.Repository;
 public class ProductRepository : IProductRepository
 {
     private readonly Dictionary<Guid, Product> _products = new();
-    private Random _rnd = new Random();
+    private readonly Random _rnd = new();
     public ProductRepository()
     {
-        InitializeProductStore();
-    } 
+        for (int i = 0; i < 5; i++)
+        {
+            Guid id = Guid.NewGuid();
+            _products.Add(id, new Product(id, $"Sample Product {i + 1}", _rnd.Next(40, 50), _rnd.Next(1, 5)));
+        }
+    }
 
     public List<Product> GetAll()
     {
@@ -25,12 +26,6 @@ public class ProductRepository : IProductRepository
 
     private void InitializeProductStore()
     {
-        //Creating 5 random sample products
-        for (var i = 0; i < 5; i++)
-        {
-            var id = Guid.NewGuid();
-            _products.Add(id, new Product(id, $"Sample Product {i+1}", _rnd.Next(40, 50), _rnd.Next(1, 5)));
-        }
     }
 }
 

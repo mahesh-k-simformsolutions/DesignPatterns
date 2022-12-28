@@ -5,5 +5,5 @@ namespace Throttling.Repository;
 public interface IProductRepository
 {
     Product GetById(Guid id);
-    List<Product> GetAll(); 
+    List<Product> GetAll();
 }

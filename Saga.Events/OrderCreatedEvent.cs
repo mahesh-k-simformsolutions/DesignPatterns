@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Saga.Events
+﻿namespace Saga.Events
 {
     public class OrderCreatedEvent
     {

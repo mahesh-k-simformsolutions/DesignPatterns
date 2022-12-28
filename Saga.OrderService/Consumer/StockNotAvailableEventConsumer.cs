@@ -11,7 +11,7 @@ namespace Saga.OrderService.Consumer
         private readonly IOrderService _orderService;
         public StockNotAvailableEventConsumer(IOrderService orderService)
         {
-            _orderService = orderService;   
+            _orderService = orderService;
         }
         public async Task ConsumeAsync(StockNotAvailableEvent message, CancellationToken cancellationToken = default)
         {

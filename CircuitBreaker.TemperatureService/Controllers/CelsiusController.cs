@@ -1,24 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net;
-using Microsoft.AspNetCore.Mvc;
 
 namespace TemperatureService.Controllers
 {
     [Route("[controller]")]
     public class CelsiusController : ControllerBase
     {
-        static int _counter = 0;
-        static readonly Random randomTemperature = new Random();
+        private static int _counter = 0;
+        private static readonly Random randomTemperature = new();
 
         [HttpGet("{locationId}")]
         public ActionResult Get(int locationId)
         {
             _counter++;
-            if (_counter % 4 != 0)
-            {
-                return Ok(randomTemperature.Next(0, 100));
-            }
-            return StatusCode((int) HttpStatusCode.InternalServerError, "Something went wrong when getting the temperature.");
+            return _counter % 4 != 0
+                ? Ok(randomTemperature.Next(0, 100))
+                : (ActionResult)StatusCode((int)HttpStatusCode.InternalServerError, "Something went wrong when getting the temperature.");
         }
     }
 }

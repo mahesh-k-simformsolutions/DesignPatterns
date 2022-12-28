@@ -1,17 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Polly;
-using Polly.Extensions.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace CircuitBreaker.WeatherService
 {
@@ -33,7 +27,7 @@ namespace CircuitBreaker.WeatherService
                 .HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
                 .CircuitBreakerAsync(2, TimeSpan.FromSeconds(30),
                 CircuitBreakerActions.OnBreak,
-                CircuitBreakerActions.OnReset, 
+                CircuitBreakerActions.OnReset,
                 CircuitBreakerActions.OnHalfOpen);
 
             services.AddHttpClient("TemperatureService", client =>

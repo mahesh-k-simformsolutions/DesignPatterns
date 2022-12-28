@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Saga.OrderService.Data;
 using Saga.OrderService.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Saga.OrderService.Controllers
@@ -23,7 +19,7 @@ namespace Saga.OrderService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrder(Order order)
         {
-            await _orderService.CreateOrderAsync(order);
+            _ = await _orderService.CreateOrderAsync(order);
 
             return Accepted();
         }

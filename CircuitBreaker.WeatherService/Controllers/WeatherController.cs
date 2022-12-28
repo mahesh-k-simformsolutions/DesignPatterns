@@ -1,6 +1,6 @@
-﻿using System.Net.Http;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace WeatherService.Controllers
 {
@@ -17,7 +17,7 @@ namespace WeatherService.Controllers
         [HttpGet("fahrenheit/{locationId}")]
         public async Task<ActionResult> GetFahrenheit(int locationId)
         {
-            var httpClient = _httpClientFactory.CreateClient("TemperatureService");
+            HttpClient httpClient = _httpClientFactory.CreateClient("TemperatureService");
             HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"fahrenheit/{locationId}");
 
             if (httpResponseMessage.IsSuccessStatusCode)
@@ -32,7 +32,7 @@ namespace WeatherService.Controllers
         [HttpGet("celsius/{locationId}")]
         public async Task<ActionResult> GetCelsius(int locationId)
         {
-            var httpClient = _httpClientFactory.CreateClient("TemperatureService");
+            HttpClient httpClient = _httpClientFactory.CreateClient("TemperatureService");
             HttpResponseMessage httpResponseMessage = await httpClient.GetAsync($"celsius/{locationId}");
 
             if (httpResponseMessage.IsSuccessStatusCode)

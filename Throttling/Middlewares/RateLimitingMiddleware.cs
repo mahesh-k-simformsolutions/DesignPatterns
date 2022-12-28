@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
+using System.Net;
 using Throttling.Atrribute;
 using Throttling.Extensions;
-using System.Net;
 
 namespace Throttling.Middlewares;
 
@@ -18,8 +18,8 @@ public class RateLimitingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var endpoint = context.GetEndpoint();
-        var rateLimitingDecorator = endpoint?.Metadata.GetMetadata<LimitRequests>();
+        Endpoint? endpoint = context.GetEndpoint();
+        LimitRequests? rateLimitingDecorator = endpoint?.Metadata.GetMetadata<LimitRequests>();
 
         if (rateLimitingDecorator is null)
         {
@@ -27,8 +27,8 @@ public class RateLimitingMiddleware
             return;
         }
 
-        var key = GenerateClientKey(context);
-        var clientStatistics = await GetClientStatisticsByKey(key);
+        string? key = GenerateClientKey(context);
+        ClientStatistics? clientStatistics = await GetClientStatisticsByKey(key);
 
         if (clientStatistics != null && DateTime.UtcNow < clientStatistics.LastSuccessfulResponseTime.AddSeconds(rateLimitingDecorator.TimeWindow) && clientStatistics.NumberOfRequestsCompletedSuccessfully == rateLimitingDecorator.MaxRequests)
         {
@@ -40,29 +40,38 @@ public class RateLimitingMiddleware
         await _next(context);
     }
 
-    private static string GenerateClientKey(HttpContext context) => $"{context.Request.Path}_{context.Connection.RemoteIpAddress}";
+    private static string GenerateClientKey(HttpContext context)
+    {
+        return $"{context.Request.Path}_{context.Connection.RemoteIpAddress}";
+    }
 
-    private async Task<ClientStatistics> GetClientStatisticsByKey(string key) => await _cache.GetCacheValueAsync<ClientStatistics>(key);
+    private async Task<ClientStatistics> GetClientStatisticsByKey(string key)
+    {
+        return await _cache.GetCacheValueAsync<ClientStatistics>(key);
+    }
 
     private async Task UpdateClientStatisticsStorage(string key, int maxRequests)
     {
-        var clientStat = await _cache.GetCacheValueAsync<ClientStatistics>(key);
+        ClientStatistics? clientStat = await _cache.GetCacheValueAsync<ClientStatistics>(key);
 
         if (clientStat != null)
         {
             clientStat.LastSuccessfulResponseTime = DateTime.UtcNow;
 
             if (clientStat.NumberOfRequestsCompletedSuccessfully == maxRequests)
+            {
                 clientStat.NumberOfRequestsCompletedSuccessfully = 1;
-
+            }
             else
+            {
                 clientStat.NumberOfRequestsCompletedSuccessfully++;
+            }
 
             await _cache.SetCahceValueAsync<ClientStatistics>(key, clientStat);
         }
         else
         {
-            var clientStatistics = new ClientStatistics
+            ClientStatistics? clientStatistics = new()
             {
                 LastSuccessfulResponseTime = DateTime.UtcNow,
                 NumberOfRequestsCompletedSuccessfully = 1

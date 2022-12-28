@@ -2,7 +2,6 @@
 using EasyNetQ.AutoSubscribe;
 using Saga.Events;
 using Saga.PaymentService.Service;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +20,7 @@ namespace Saga.PaymentService.Consumer
 
         public async Task ConsumeAsync(StocksReservedEvent message, CancellationToken cancellationToken = default)
         {
-            var isPaymentCompleted =  _paymentService.MakePayment(message.OrderId, message.TotalAmount);
+            int isPaymentCompleted = _paymentService.MakePayment(message.OrderId, message.TotalAmount);
 
             if (isPaymentCompleted > 0)
             {

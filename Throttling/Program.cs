@@ -1,5 +1,5 @@
-using Throttling.Repository;
 using Throttling.Middlewares;
+using Throttling.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

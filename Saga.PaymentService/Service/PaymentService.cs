@@ -1,6 +1,5 @@
 ﻿using EasyNetQ;
 using Saga.PaymentService.Data;
-using System.Threading.Tasks;
 
 namespace Saga.PaymentService.Service
 {
@@ -16,12 +15,12 @@ namespace Saga.PaymentService.Service
         }
         public int MakePayment(int orderId, decimal totalAmount)
         {
-            var payment = new Payment()
+            Payment payment = new()
             {
                 OrderId = orderId,
                 TotalAmount = totalAmount
             };
-            _context.Payments.Add(payment);
+            _ = _context.Payments.Add(payment);
             return _context.SaveChanges();
         }
     }

@@ -6,7 +6,7 @@ namespace Saga.PaymentService.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Payments",
                 columns: table => new
                 {
@@ -17,13 +17,13 @@ namespace Saga.PaymentService.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    _ = table.PrimaryKey("PK_Payments", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Payments");
         }
     }

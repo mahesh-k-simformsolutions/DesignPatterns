@@ -20,7 +20,7 @@ namespace Saga.StockService.Consumer
 
         public async Task ConsumeAsync(OrderCreatedEvent message, CancellationToken cancellationToken = default)
         {
-            var reserved = await _stockService.ReserveStocksAsync(message.Product, message.OrderId);
+            bool reserved = await _stockService.ReserveStocksAsync(message.Product, message.OrderId);
             if (reserved)
             {
                 await _bus.PubSub.PublishAsync(new StocksReservedEvent

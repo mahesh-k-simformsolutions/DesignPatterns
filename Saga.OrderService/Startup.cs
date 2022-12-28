@@ -1,25 +1,15 @@
+using EasyNetQ;
+using EasyNetQ.AutoSubscribe;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Saga.OrderService.Consumer;
 using Saga.OrderService.Data;
 using Saga.OrderService.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using EasyNetQ;
 using System.Reflection;
-using EasyNetQ.AutoSubscribe;
-using System.Threading;
-using Saga.OrderService.Consumer;
-using Saga.Events;
 
 namespace Saga.OrderService
 {
@@ -40,26 +30,26 @@ namespace Saga.OrderService
             _ = services.AddControllers();
             _ = services.AddScoped<IOrderService, OrderService.Service.OrderService>();
             _ = services.AddSwaggerGen();
-            
-            services.AddSingleton<IBus>(RabbitHutch.CreateBus("host=localhost;username=guest;password=guest"));
-            services.AddSingleton<MessageDispatcher>();
 
-            services.AddSingleton<AutoSubscriber>(_ =>
+            _ = services.AddSingleton<IBus>(RabbitHutch.CreateBus("host=localhost;username=guest;password=guest"));
+            _ = services.AddSingleton<MessageDispatcher>();
+
+            _ = services.AddSingleton<AutoSubscriber>(_ =>
             {
                 return new AutoSubscriber(_.GetRequiredService<IBus>(), Assembly.GetExecutingAssembly().GetName().Name)
                 {
                     AutoSubscriberMessageDispatcher = _.GetRequiredService<MessageDispatcher>()
                 };
             });
-            services.AddScoped<PaymentCompletedEventConsumer>();
-            services.AddScoped<StocksReleasedEventConsumer>();
-            services.AddScoped<StockNotAvailableEventConsumer>();
+            _ = services.AddScoped<PaymentCompletedEventConsumer>();
+            _ = services.AddScoped<StocksReleasedEventConsumer>();
+            _ = services.AddScoped<StockNotAvailableEventConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.ApplicationServices.GetRequiredService<AutoSubscriber>().SubscribeAsync(new Assembly[] { Assembly.GetExecutingAssembly() });
+            _ = app.ApplicationServices.GetRequiredService<AutoSubscriber>().SubscribeAsync(new Assembly[] { Assembly.GetExecutingAssembly() });
 
             _ = app.UseSwagger();
 

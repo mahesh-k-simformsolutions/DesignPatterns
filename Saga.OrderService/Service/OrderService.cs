@@ -13,18 +13,18 @@ namespace Saga.OrderService.Service
         public OrderService(IBus bus, AppDbContext context)
         {
             _bus = bus;
-            _context = context; 
+            _context = context;
         }
 
         public async Task<int> CreateOrderAsync(Order order)
         {
             order.Status = OrderStatus.Pending;
-            _context.Orders.Add(order);
-            var result = await _context.SaveChangesAsync();
+            _ = _context.Orders.Add(order);
+            int result = await _context.SaveChangesAsync();
 
             if (result > 0)
             {
-                var message = new OrderCreatedEvent
+                OrderCreatedEvent message = new()
                 {
                     OrderId = order.Id,
                     TotalAmount = order.Amount,
@@ -38,19 +38,19 @@ namespace Saga.OrderService.Service
 
         public Task CompleteOrderAsync(int orderId)
         {
-            var order =  _context.Orders.Find(orderId);
+            Order order = _context.Orders.Find(orderId);
             order.Status = OrderStatus.Completed;
-            _context.Orders.Update(order);
-             _context.SaveChanges();
+            _ = _context.Orders.Update(order);
+            _ = _context.SaveChanges();
             return Task.CompletedTask;
         }
 
         public Task RejectOrderAsync(int orderId, string reason)
         {
-            var order =  _context.Orders.Find(orderId);
+            Order order = _context.Orders.Find(orderId);
             order.Status = OrderStatus.Rejected;
-            _context.Orders.Update(order);
-             _context.SaveChanges();
+            _ = _context.Orders.Update(order);
+            _ = _context.SaveChanges();
             return Task.CompletedTask;
         }
     }

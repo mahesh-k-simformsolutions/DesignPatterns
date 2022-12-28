@@ -26,7 +26,7 @@ namespace Saga.StockService.Service
 
         public async Task<bool> ReserveStocksAsync(string product, int orderId)
         {
-            var stockRecord = _context.StockRecords.FirstOrDefault(x => x.ProductName == product);
+            StockRecord stockRecord = _context.StockRecords.FirstOrDefault(x => x.ProductName == product);
             if (stockRecord == null || stockRecord.Stock == 0)
             {
                 await _bus.PubSub.PublishAsync(new StockNotAvailableEvent
@@ -39,8 +39,8 @@ namespace Saga.StockService.Service
             else
             {
                 stockRecord.Stock -= 1;
-                _context.StockRecords.Update(stockRecord);
-                await _context.SaveChangesAsync();
+                _ = _context.StockRecords.Update(stockRecord);
+                _ = await _context.SaveChangesAsync();
                 return true;
             }
         }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Saga.Events
+﻿namespace Saga.Events
 {
     public class StocksReleasedEvent
     {

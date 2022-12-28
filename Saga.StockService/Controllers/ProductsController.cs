@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Saga.StockService.Data;
 using Saga.StockService.Service;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Saga.StockService.Controllers
@@ -23,7 +20,7 @@ namespace Saga.StockService.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductStocks()
         {
-            var result = await _stockService.GetAll();
+            IEnumerable<StockRecord> result = await _stockService.GetAll();
             return Ok(result);
         }
     }
